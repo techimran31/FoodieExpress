@@ -184,16 +184,20 @@ export function renderCart() {
 // ---- Checkout (checkout.html) ----
 export function renderCheckout() {
   const items = cart.items;
-  const box = document.getElementById('checkoutItems');
+  const box = document.getElementById('checkoutItemsList');
+  const aside = document.getElementById('checkoutAside');
   if (!box) return;
 
   if (!items.length) {
     const formWrap = document.getElementById('checkoutFormWrap');
     const emptyEl = document.getElementById('checkoutEmpty');
     if (formWrap) formWrap.classList.add('d-none');
+    if (aside) aside.classList.add('d-none');
     if (emptyEl) emptyEl.classList.remove('d-none');
     return;
   }
+
+  if (aside) aside.classList.remove('d-none');
 
   box.innerHTML = items.map((i) => `
     <div class="summary-row">
@@ -205,9 +209,13 @@ export function renderCheckout() {
   const subEl = document.getElementById('checkoutSubtotal');
   const feeEl = document.getElementById('checkoutFee');
   const totalEl = document.getElementById('checkoutTotal');
+  const emptyEl = document.getElementById('checkoutEmpty');
+  const formWrap = document.getElementById('checkoutFormWrap');
   if (subEl) subEl.textContent = money(cart.getSubtotal());
   if (feeEl) feeEl.textContent = money(cart.getDeliveryFee());
   if (totalEl) totalEl.textContent = money(cart.getTotal());
+  if (emptyEl) emptyEl.classList.add('d-none');
+  if (formWrap) formWrap.classList.remove('d-none');
 
   const form = document.getElementById('checkoutForm');
   if (form) {

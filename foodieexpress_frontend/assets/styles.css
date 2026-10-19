@@ -207,3 +207,26 @@ body {
 .footer{border-top:1px solid var(--line);color:#777;background:#fff}.form-control,.form-select{border-radius:11px;padding:.75rem .9rem}.form-control:focus,.form-select:focus{border-color:#ffad8e;box-shadow:0 0 0 .2rem #f4511e18}
 .empty-state{padding:48px 20px;text-align:center;border:1px dashed #d8dce1;border-radius:18px}.empty-state .display-4{color:#ffb08f}.admin-stat{padding:20px;border:1px solid var(--line);border-radius:16px}.status-badge{border-radius:30px;padding:6px 10px;font-size:.76rem;font-weight:750;background:#fff0dc;color:#9a5a00}.status-delivered{background:#e0f7ea;color:#168650}.status-cancelled{background:#fee2e2;color:#b42318}
 @media(max-width:576px){.menu-item{align-items:flex-start;gap:12px}.menu-emoji{width:76px;height:76px;font-size:2.2rem}.food-image{height:150px}.hero h1{letter-spacing:-1px}}
+
+/* Toast notifications */
+.toast-container { pointer-events: none; }
+.toast { min-width: 300px; }
+
+/* Checkout aside */
+#checkoutAside { position: sticky; top: 100px; }
+
+/* Food emoji in restaurant cards */
+.food-emoji { width: 64px; height: 64px; border-radius: 16px; display: grid; place-items: center; font-size: 2rem; margin-bottom: 12px; }
+
+/* Menu item emoji */
+.menu-emoji { width: 56px; height: 56px; border-radius: 12px; display: grid; place-items: center; font-size: 1.8rem; flex-shrink: 0; }
+
+/* Qty buttons */
+.qty-btn { width: 32px; height: 32px; display: grid; place-items: center; }
+
+/* Rating pill */
+.rating { color: var(--swinggy-orange, #fc8019); font-weight: 700; }
+
+/* Cancel button */
+.btn-outline-danger { border-color: #dc3545; color: #dc3545; }
+.btn-outline-danger:hover { background: #dc3545; color: #fff; }
