@@ -1,0 +1,21 @@
+{
+  "name": "foodieexpress-frontend",
+  "version": "1.0.0",
+  "description": "FoodieExpress — Responsive food ordering frontend",
+  "private": true,
+  "scripts": {
+    "dev": "live-server --port=5500 --open=foodieexpress_frontend/index.html",
+    "test": "jest --watch",
+    "test:ci": "jest --ci",
+    "lint": "eslint assets/js/",
+    "build": "echo 'Static site — no build step required'"
+  },
+  "keywords": ["food-delivery", "frontend", "html", "javascript", "bootstrap"],
+  "author": "FoodieExpress",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.57.0",
+    "live-server": "^1.2.2"
+  }
+}
