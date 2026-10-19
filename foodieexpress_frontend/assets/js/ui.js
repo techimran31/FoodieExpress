@@ -222,21 +222,54 @@ export function renderCheckout() {
     const newForm = form.cloneNode(true);
     form.parentNode.replaceChild(newForm, form);
 
+    const modal = new bootstrap.Modal(document.getElementById('paymentModal'));
+    const demoPayBtn = document.getElementById('demoPayBtn');
+    const modalAmount = document.getElementById('modalAmount');
+    let pendingOrderData = null;
+
+    // Update modal amount whenever totals change
+    const updateModalAmount = () => {
+      if (modalAmount) modalAmount.textContent = money(cart.getTotal());
+    };
+    updateModalAmount();
+    window.addEventListener('cart:changed', updateModalAmount);
+
+    demoPayBtn.addEventListener('click', () => {
+      modal.hide();
+      if (pendingOrderData) {
+        try {
+          const order = orderManager.create(pendingOrderData.customer, pendingOrderData.payment);
+          toast('Payment successful! Order placed.');
+          location.href = 'confirmation.html';
+        } catch (err) {
+          toast(err.message || 'Failed to place order. Please try again.');
+        }
+        pendingOrderData = null;
+      }
+    });
+
     newForm.addEventListener('submit', (e) => {
       e.preventDefault();
       if (!newForm.reportValidity()) return;
 
-      try {
-        const customer = {
-          name: newForm.customerName.value.trim(),
-          phone: newForm.phone.value.trim(),
-          address: newForm.address.value.trim(),
-        };
-        const payment = newForm.payment.value;
+      const customer = {
+        name: newForm.customerName.value.trim(),
+        phone: newForm.phone.value.trim(),
+        address: newForm.address.value.trim(),
+      };
+      const payment = newForm.payment.value;
 
+      if (payment === 'Online payment (demo)') {
+        pendingOrderData = { customer, payment };
+        updateModalAmount();
+        modal.show();
+        return;
+      }
+
+      try {
         const order = orderManager.create(customer, payment);
         toast('Order placed successfully!');
-        location.href = 'delivery.html';
+        location.href = 'confirmation.html';
       } catch (err) {
         toast(err.message || 'Failed to place order. Please try again.');
       }
