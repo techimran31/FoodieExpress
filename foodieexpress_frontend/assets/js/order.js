@@ -5,6 +5,7 @@ import { cart } from './cart.js';
 class OrderManager {
   constructor() {
     this.orders = storage.get(CONFIG.STORAGE_KEYS.ORDERS);
+    this._simulationTimers = new Map();
   }
 
   save() {
@@ -38,6 +39,7 @@ class OrderManager {
     this.save();
     storage.set(CONFIG.STORAGE_KEYS.ACTIVE_ORDER, order.id);
     cart.clear();
+    this.startDeliverySimulation(order.id);
     return order;
   }
 
@@ -52,6 +54,9 @@ class OrderManager {
   }
 
   cancel(id) {
+    const order = this.find(id);
+    if (!order) return false;
+    this._stopSimulation(id);
     return this.updateStatus(id, 'Cancelled');
   }
 
@@ -72,6 +77,68 @@ class OrderManager {
         .filter((o) => o.status !== 'Cancelled')
         .reduce((sum, o) => sum + o.total, 0),
     };
+  }
+
+  // ---- Delivery simulation (demo only) ----
+  startDeliverySimulation(orderId) {
+    this._stopSimulation(orderId);
+    const order = this.find(orderId);
+    if (!order || order.status === 'Delivered' || order.status === 'Cancelled') return;
+
+    const statuses = CONFIG.ORDER_STATUSES.slice(0, 5); // Confirmed..Delivered
+    const currentIdx = statuses.indexOf(order.status);
+    if (currentIdx < 0 || currentIdx >= statuses.length - 1) return;
+
+    const delays = [90, 90, 90, 90]; // seconds between status changes
+    let idx = currentIdx;
+
+    const timer = setInterval(() => {
+      idx += 1;
+      if (idx >= statuses.length) {
+        this._stopSimulation(orderId);
+        return;
+      }
+      this.updateStatus(orderId, statuses[idx]);
+      if (statuses[idx] === 'Delivered' || statuses[idx] === 'Cancelled') {
+        this._stopSimulation(orderId);
+      }
+    }, delays[idx - 1] * 1000);
+
+    this._simulationTimers.set(orderId, timer);
+  }
+
+  _stopSimulation(orderId) {
+    const timer = this._simulationTimers.get(orderId);
+    if (timer) {
+      clearInterval(timer);
+      this._simulationTimers.delete(orderId);
+    }
+  }
+
+  stopAllSimulations() {
+    this._simulationTimers.forEach((timer, id) => clearInterval(timer));
+    this._simulationTimers.clear();
+  }
+
+  // ---- Reorder ----
+  reorder(orderId) {
+    const order = this.find(orderId);
+    if (!order || !order.items || !order.items.length) return false;
+
+    // Clear cart and add all items from the order
+    cart.items = [];
+    order.items.forEach((item) => {
+      cart.items.push({
+        restaurantId: item.restaurantId,
+        restaurant: item.restaurant,
+        name: item.name,
+        price: item.price,
+        emoji: item.emoji,
+        qty: item.qty,
+      });
+    });
+    cart.save();
+    return true;
   }
 }
 

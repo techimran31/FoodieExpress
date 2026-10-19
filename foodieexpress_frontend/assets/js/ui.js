@@ -373,6 +373,10 @@ export function renderOrders() {
           ? `<button class="btn btn-sm btn-outline-danger ms-1" onclick="window.cancelOrder('${o.id}')">Cancel</button>`
           : ''
         }
+        ${o.status === 'Delivered'
+          ? `<button class="btn btn-sm btn-outline-brand ms-1" onclick="window.reorderOrder('${o.id}')">Reorder</button>`
+          : ''
+        }
       </td>
     </tr>
   `).join('');
@@ -413,4 +417,13 @@ window.cancelOrder = (id) => {
 
 window.setActiveOrder = (id) => {
   orderManager.setActiveId(id);
+};
+
+window.reorderOrder = (id) => {
+  if (orderManager.reorder(id)) {
+    toast('Items added to cart! Proceed to checkout.');
+    location.href = 'cart.html';
+  } else {
+    toast('Unable to reorder this order.');
+  }
 };
