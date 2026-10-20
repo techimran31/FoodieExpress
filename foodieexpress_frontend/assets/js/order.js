@@ -157,9 +157,9 @@ class OrderManager {
     }
   }
 
-  // Clear EVERY simulation timer (page unload / tests teardown)
+  // Halt ALL timers (used when leaving the app or resetting demo state)
   stopAllSimulations() {
-    this._simulationTimers.forEach((timer, id) => clearInterval(timer));
+    this._simulationTimers.forEach((timer) => clearTimeout(timer)); // cancel each
     this._simulationTimers.clear(); // empty the map
   }
 
@@ -181,73 +181,11 @@ class OrderManager {
         qty: item.qty,
       });
     });
-    cart.save(); // persist + refresh badges + broadcast 'cart:changed'
+    cart.save(); // persist + refresh badges
+    window.dispatchEvent(new CustomEvent('cart:changed', { detail: { items: cart.items } }));
     return true; // caller shows success toast + redirects to cart
   }
 }
 
 // Singleton instance shared by ui.js (renders) and inline HTML handlers
-export const orderManager = new OrderManager();
-  startDeliverySimulation(orderId) {
-    this._stopSimulation(orderId);
-    const order = this.find(orderId);
-    if (!order || order.status === 'Delivered' || order.status === 'Cancelled') return;
-
-    const statuses = CONFIG.ORDER_STATUSES.slice(0, 5); // Confirmed..Delivered
-    const currentIdx = statuses.indexOf(order.status);
-    if (currentIdx < 0 || currentIdx >= statuses.length - 1) return;
-
-    const delays = [90, 90, 90, 90]; // seconds between status changes
-    let idx = currentIdx;
-
-    const timer = setInterval(() => {
-      idx += 1;
-      if (idx >= statuses.length) {
-        this._stopSimulation(orderId);
-        return;
-      }
-      this.updateStatus(orderId, statuses[idx]);
-      if (statuses[idx] === 'Delivered' || statuses[idx] === 'Cancelled') {
-        this._stopSimulation(orderId);
-      }
-    }, delays[idx - 1] * 1000);
-
-    this._simulationTimers.set(orderId, timer);
-  }
-
-  _stopSimulation(orderId) {
-    const timer = this._simulationTimers.get(orderId);
-    if (timer) {
-      clearInterval(timer);
-      this._simulationTimers.delete(orderId);
-    }
-  }
-
-  stopAllSimulations() {
-    this._simulationTimers.forEach((timer, id) => clearInterval(timer));
-    this._simulationTimers.clear();
-  }
-
-  // ---- Reorder ----
-  reorder(orderId) {
-    const order = this.find(orderId);
-    if (!order || !order.items || !order.items.length) return false;
-
-    // Clear cart and add all items from the order
-    cart.items = [];
-    order.items.forEach((item) => {
-      cart.items.push({
-        restaurantId: item.restaurantId,
-        restaurant: item.restaurant,
-        name: item.name,
-        price: item.price,
-        emoji: item.emoji,
-        qty: item.qty,
-      });
-    });
-    cart.save();
-    return true;
-  }
-}
-
 export const orderManager = new OrderManager();
