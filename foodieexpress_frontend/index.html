@@ -1,12 +1,396 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#fc8019"><title>FoodieExpress — Order food online</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"><link href="assets/styles.css" rel="stylesheet"></head><body>
-<nav class="navbar navbar-expand-lg sticky-top shadow-sm"><div class="container px-3 px-lg-0"><div class="d-flex align-items-center w-100"><div class="flex-grow-1 d-flex align-items-center"><button class="btn location-btn me-3 d-none d-lg-flex align-items-center"><i class="bi bi-geo-alt-fill text-brand me-1"></i><span>Deliver to <strong>City</strong></span><i class="bi bi-chevron-down ms-1 fs-6"></i></button><a class="navbar-brand d-flex align-items-center" href="index.html"><span class="brand-mark"><i class="bi bi-egg-fried"></i></span><span class="brand-name">Foodie<span class="text-brand">Express</span></span></a></div><div class="d-none d-lg-flex flex-grow-1 justify-content-center"><div class="search-pill position-relative w-100" style="max-width:560px"><i class="bi bi-search position-absolute top-50 start-3 translate-middle text-muted"></i><input type="text" class="form-control search-input border-0 ps-5 pe-4 py-2" placeholder="Search for restaurants &amp; cuisines" aria-label="Search restaurants"><button class="btn btn-brand btn-sm position-absolute top-50 end-0 translate-middle-y px-3 py-0 d-none d-lg-block" type="button">Search</button></div></div><div class="flex-grow-1 d-flex justify-content-end align-items-center gap-2"><a class="nav-link p-0 d-none d-lg-flex align-items-center text-decoration-none" href="profile.html" aria-label="Profile"><i class="bi bi-person-circle fs-4 text-muted"></i></a><a class="btn btn-brand btn-sm px-3 py-2 d-none d-lg-flex align-items-center gap-1" href="cart.html"><i class="bi bi-bag-fill fs-5"></i><span class="fw-bold">Cart <span class="badge rounded-pill bg-white text-brand ms-1 fw-bold" data-cart-count>0</span></span></a><button class="navbar-toggler d-lg-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-label="Toggle navigation"><i class="bi bi-list fs-4"></i></button></div></div></div></nav>
-<div class="offcanvas offcanvas-end" id="mobileMenu" style="width:72vw"><div class="offcanvas-header"><h5 class="offcanvas-title fw-bold">Foodie<span class="text-brand">Express</span></h5><button class="btn-close" data-bs-dismiss="offcanvas"></button></div><div class="offcanvas-body"><div class="list-group list-group-flush mb-4"><a class="list-group-item list-group-item-action d-flex align-items-center gap-3 border-0 bg-transparent px-0" href="index.html"><i class="bi bi-house-door text-brand fs-5"></i><span>Home</span></a><a class="list-group-item list-group-item-action d-flex align-items-center gap-3 border-0 bg-transparent px-0" href="orders.html"><i class="bi bi-box fs-5 text-muted"></i><span>Your orders</span></a><a class="list-group-item list-group-item-action d-flex align-items-center gap-3 border-0 bg-transparent px-0" href="delivery.html"><i class="bi bi-truck fs-5 text-muted"></i><span>Track order</span></a></div><a href="cart.html" class="btn btn-brand w-100 mb-3"><i class="bi bi-bag-fill me-2"></i> Cart <span class="badge bg-white text-brand ms-auto" data-cart-count>0</span></a></div></div>
-<main>
-<section class="hero-banner position-relative overflow-hidden" id="hero"><div class="hero-overlay position-absolute inset-0"></div><img src="img/food/chicken 65 biryani.avif" class="w-100 h-100 object-cover" style="height:500px;object-position:center" alt="Biryani"><div class="hero-decoration position-absolute"></div><div class="position-relative z-3 container py-5 pt-md-6"><div class="row gy-4 gy-lg-0"><div class="col-lg-7 text-white"><div class="hero-content"><span class="hero-eyebrow">Cravings called</span><h1 class="hero-title">We're on our way.</h1><p class="hero-subtitle">Discover local favourites, order what you love, and get it delivered fresh to your door.</p><div class="hero-cta-group"><a href="#restaurants" class="btn btn-brand btn-lg">Explore restaurants <i class="bi bi-arrow-right ms-2"></i></a><a href="orders.html" class="btn btn-outline-brand btn-lg">Your orders</a></div><div class="hero-features"><span class="hero-feature"><i class="bi bi-check-circle-fill me-2"></i> Easy ordering</span><span class="hero-feature"><i class="bi bi-clock me-2"></i> Live order progress</span><span class="hero-feature"><i class="bi bi-heart-fill me-2"></i> Local favourites</span></div></div></div>
-</section>
-<section class="py-4 bg-white"><div class="container px-3 px-lg-0"><div class="d-flex justify-content-between align-items-center mb-3"><h2 class="section-title h5 fw-bold mb-0">Categories</h2><a href="#restaurants" class="text-brand small fw-semibold">See all <i class="bi bi-arrow-right ms-1"></i></a></div><div class="category-scroll overflow-auto pb-3"><div class="d-flex gap-2"><button class="category-pill active px-4 py-2">North Indian</button><button class="category-pill px-4 py-2">South Indian</button><button class="category-pill px-4 py-2">Chinese</button><button class="category-pill px-4 py-2">Pizza</button><button class="category-pill px-4 py-2">Burgers</button><button class="category-pill px-4 py-2">Biryani</button><button class="category-pill px-4 py-2">Desserts</button><button class="category-pill px-4 py-2">Beverages</button><button class="category-pill px-4 py-2">Healthy</button><button class="category-pill px-4 py-2">Fast Food</button></div></div></div></section>
-<section class="container py-4 py-lg-5"><div class="hero"><div class="row align-items-center g-4"><div class="col-lg-7"><div class="eyebrow mb-3">GOOD FOOD, GOOD MOOD</div><h1>Cravings called.<br><span class="text-brand">We’re on our way.</span></h1><p class="mt-3 mb-4">Discover local favourites, order what you love, and get it delivered fresh to your door.</p><div class="d-flex flex-wrap gap-2"><a href="#restaurants" class="btn btn-brand btn-lg">Explore restaurants <i class="bi bi-arrow-right ms-2"></i></a><a href="orders.html" class="btn btn-outline-brand btn-lg">Your orders</a></div><div class="d-flex flex-wrap gap-4 mt-4 small"><span><i class="bi bi-check-circle-fill text-success me-1"></i> Easy ordering</span><span><i class="bi bi-clock text-brand me-1"></i> Live order progress</span><span><i class="bi bi-heart-fill text-danger me-1"></i> Local favourites</span></div></div><div class="col-lg-5 text-center"><div style="font-size:clamp(8rem,20vw,14rem);line-height:1">🍱</div><div class="pill shadow-sm">Fresh picks, just for you</div></div></div></div>
-<div class="row g-3 mt-4"><div class="col-md-4"><div class="admin-stat h-100"><div class="text-brand fs-3 mb-2"><i class="bi bi-lightning-charge"></i></div><div class="fw-bold">Quick and easy</div><div class="small muted">Your next favourite meal is a few clicks away.</div></div></div><div class="col-md-4"><div class="admin-stat h-100"><div class="text-brand fs-3 mb-2"><i class="bi bi-shop"></i></div><div class="fw-bold">Local restaurants</div><div class="small muted">Browse different cuisines and discover new tastes.</div></div></div><div class="col-md-4"><div class="admin-stat h-100"><div class="text-brand fs-3 mb-2"><i class="bi bi-bicycle"></i></div><div class="fw-bold">Order tracking</div><div class="small muted">Follow every step from kitchen to doorstep.</div></div></div></div>
-<div id="restaurants" class="pt-5 mt-2"><div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3 mb-4"><div><div class="eyebrow mb-2">YOUR NEXT GREAT MEAL</div><h2 class="section-title mb-1">Popular near you</h2><p class="muted mb-0">A few crowd-pleasers to get you started.</p></div><span class="pill">6 demo restaurants</span></div><div class="row g-3 mb-4"><div class="col-md-8"><div class="search-wrap d-flex align-items-center gap-2"><i class="bi bi-search muted"></i><input id="restaurantSearch" class="form-control border-0 shadow-none p-2" placeholder="Search restaurants or cuisines..." aria-label="Search restaurants"></div></div><div class="col-md-4"><select id="cuisineFilter" class="form-select"><option value="">All cuisines</option><option>Indian</option><option>Burgers</option><option>Healthy</option><option>Pizza</option><option>Asian</option><option>Desserts</option></select></div></div><div id="restaurantGrid" class="row g-4"></div><div id="noRestaurants" class="empty-state d-none mt-3"><div class="fs-1">🔎</div><h3 class="h5 fw-bold mt-2">No matches found</h3><p class="muted mb-0">Try another restaurant name or cuisine.</p></div></div></section>
-</main><footer class="footer mt-5 py-4"><div class="container d-flex flex-column flex-md-row justify-content-between gap-2"><span class="fw-bold">Foodie<span class="text-brand">Express</span></span><span class="small">Good food, delivered with a little joy. <span class="muted">Demo frontend · No real payments</span></span></div></footer><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script><script type="module" src="assets/js/app.js"></script></body></html>
+<!doctype html><!-- Document type: HTML5 (enables modern elements + strict parsing) -->
+<html lang="en"><!-- Root element, page language = English (screen-reader friendly) -->
+<head>
+  <!-- ==== Character encoding: must be first so no mojibake in titles ==== -->
+  <meta charset="utf-8">
+  <!-- ==== Responsive viewport: scales correctly on phones/tablets ==== -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- ==== Android Chrome UI tint = brand orange ==== -->
+  <meta name="theme-color" content="#fc8019">
+  <!-- ==== SEO: title shown in the browser tab & search results ==== -->
+  <title>FoodieExpress — Order food online</title>
+  <!-- ==== Bootstrap 5.3: grid + utility classes (CDN) ==== -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- ==== Bootstrap Icons: bi-geo-alt, bi-heart, bi-star… (CDN) ==== -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- ==== Our design system: tokens, components, animations ==== -->
+  <link href="assets/styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ================= STICKY NAVBAR (visible on every page) ================= -->
+  <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
+    <div class="container px-3 px-lg-0">
+      <div class="d-flex align-items-center w-100"><!-- flex row: left | search | right -->
+
+        <!-- LEFT: location picker + brand logo -->
+        <div class="flex-grow-1 d-flex align-items-center">
+          <!-- Delivery-location button (desktop only) — purely decorative demo -->
+          <button class="btn location-btn me-3 d-none d-lg-flex align-items-center">
+            <i class="bi bi-geo-alt-fill text-brand me-1"></i><!-- pin icon -->
+            <span>Deliver to <strong>City</strong></span><!-- static city label -->
+            <i class="bi bi-chevron-down ms-1 fs-6"></i><!-- dropdown caret -->
+          </button>
+          <!-- Brand → logo mark + wordmark (click = home) -->
+          <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <span class="brand-mark"><i class="bi bi-egg-fried"></i></span><!-- logo tile -->
+            <span class="brand-name">Foodie<span class="text-brand">Express</span></span><!-- orange accent -->
+          </a>
+        </div>
+
+        <!-- CENTER: search pill (desktop only) -->
+        <div class="d-none d-lg-flex flex-grow-1 justify-content-center">
+          <div class="search-pill position-relative w-100" style="max-width:560px">
+            <i class="bi bi-search position-absolute top-50 start-3 translate-middle text-muted"></i>
+            <!-- Search field (visual — live search lives in the restaurants block) -->
+            <input type="text" class="form-control search-input border-0 ps-5 pe-4 py-2"
+                   placeholder="Search for restaurants &amp; cuisines" aria-label="Search restaurants">
+            <button class="btn btn-brand btn-sm position-absolute top-50 end-0 translate-middle-y px-3 py-0 d-none d-lg-block"
+                    type="button">Search</button>
+          </div>
+        </div>
+
+        <!-- RIGHT: profile, cart CTA (with live count), mobile toggle -->
+        <div class="flex-grow-1 d-flex justify-content-end align-items-center gap-2">
+          <a class="nav-link p-0 d-none d-lg-flex align-items-center text-decoration-none"
+             href="profile.html" aria-label="Profile">
+            <i class="bi bi-person-circle fs-4 text-muted"></i><!-- account icon -->
+          </a>
+          <!-- Cart button: badge count auto-updated via [data-cart-count] (cart.js) -->
+          <a class="btn btn-brand btn-sm px-3 py-2 d-none d-lg-flex align-items-center gap-1" href="cart.html">
+            <i class="bi bi-bag-fill fs-5"></i>
+            <span class="fw-bold">Cart
+              <span class="badge rounded-pill bg-white text-brand ms-1 fw-bold" data-cart-count>0</span>
+            </span>
+          </a>
+          <!-- Hamburger → Bootstrap offcanvas #mobileMenu (below) -->
+          <button class="navbar-toggler d-lg-none border-0" type="button"
+                  data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-label="Toggle navigation">
+            <i class="bi bi-list fs-4"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ MOBILE DRAWER (offcanvas sliding from the right) ============ -->
+  <div class="offcanvas offcanvas-end" id="mobileMenu" style="width:72vw">
+    <div class="offcanvas-header"><!-- title + close X -->
+      <h5 class="offcanvas-title fw-bold">Foodie<span class="text-brand">Express</span></h5>
+      <button class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body"><!-- scrollable link list -->
+      <!-- Primary navigation: Home / Orders / Tracking -->
+      <div class="list-group list-group-flush mb-4">
+        <a class="list-group-item list-group-item-action d-flex align-items-center gap-3 border-0 bg-transparent px-0"
+           href="index.html">
+          <i class="bi bi-house-door text-brand fs-5"></i><span>Home</span>
+        </a>
+        <a class="list-group-item list-group-item-action d-flex align-items-center gap-3 border-0 bg-transparent px-0"
+           href="menu.html">
+          <i class="bi bi-grid fs-5 text-muted"></i><span>Browse menu</span>
+        </a>
+        <a class="list-group-item list-group-item-action d-flex align-items-center gap-3 border-0 bg-transparent px-0"
+           href="orders.html">
+          <i class="bi bi-box fs-5 text-muted"></i><span>Your orders</span>
+        </a>
+        <a class="list-group-item list-group-item-action d-flex align-items-center gap-3 border-0 bg-transparent px-0"
+           href="delivery.html">
+          <i class="bi bi-truck fs-5 text-muted"></i><span>Track order</span>
+        </a>
+        <a class="list-group-item list-group-item-action d-flex align-items-center gap-3 border-0 bg-transparent px-0"
+           href="profile.html">
+          <i class="bi bi-person fs-5 text-muted"></i><span>Profile</span>
+        </a>
+      </div>
+      <!-- Full-width cart CTA with live count badge -->
+      <a href="cart.html" class="btn btn-brand w-100 mb-3">
+        <i class="bi bi-bag-fill me-2"></i> Cart
+        <span class="badge bg-white text-brand ms-auto" data-cart-count>0</span>
+      </a>
+    </div>
+  </div>
+
+  <main>
+    <!-- ================= HERO: full-bleed food photo + pitch ================= -->
+    <section class="hero-banner position-relative overflow-hidden" id="hero">
+      <!-- Dark gradient scrim → white text stays readable over any photo -->
+      <div class="hero-overlay position-absolute inset-0"></div>
+      <!-- Hero photo: signature biryani shot (fixed height, cover-cropped) -->
+      <img src="img/food/chicken 65 biryani.avif" class="w-100 h-100 object-cover"
+           style="height:500px;object-position:center" alt="Biryani">
+      <!-- Decorative blob (CSS-drawn glow behind content) -->
+      <div class="hero-decoration position-absolute"></div>
+      <!-- Floating parallax stickers (moved by app.js initParallaxFloat) -->
+      <span class="float-soft" data-depth="34" style="top:18%;right:10%;font-size:3rem">🍕</span>
+      <span class="float-soft" data-depth="22" style="top:58%;right:24%;font-size:2.4rem">🥗</span>
+      <span class="float-soft" data-depth="46" style="top:34%;right:38%;font-size:2rem">🍰</span>
+
+      <!-- Foreground copy (z-3 = above overlay) -->
+      <div class="position-relative z-3 container py-5 pt-md-6">
+        <div class="row gy-4 gy-lg-0">
+          <div class="col-lg-7 text-white">
+            <div class="hero-content">
+              <!-- Eyebrow chip → small uppercase kicker above the headline -->
+              <span class="hero-eyebrow">Cravings called</span>
+              <!-- H1: the single most important sentence on the page -->
+              <h1 class="hero-title">We're on our way.</h1>
+              <p class="hero-subtitle">Discover local favourites, order what you love, and get it delivered fresh to your door.</p>
+              <!-- CTA pair: primary (anchor to restaurants) + ghost (order history) -->
+              <div class="hero-cta-group">
+                <a href="#restaurants" class="btn btn-brand btn-lg">Explore restaurants <i class="bi bi-arrow-right ms-2"></i></a>
+                <a href="orders.html" class="btn btn-outline-brand btn-lg">Your orders</a>
+              </div>
+              <!-- Trust chips: quick reassurance under the buttons -->
+              <div class="hero-features">
+                <span class="hero-feature"><i class="bi bi-check-circle-fill me-2"></i> Easy ordering</span>
+                <span class="hero-feature"><i class="bi bi-clock me-2"></i> Live order progress</span>
+                <span class="hero-feature"><i class="bi bi-heart-fill me-2"></i> Local favourites</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DEAL BANNER: daily offer + live midnight countdown ============ -->
+    <section class="container mt-4">
+      <div class="deal-banner reveal">
+        <div class="row align-items-center g-3">
+          <!-- Offer copy (left) -->
+          <div class="col-md-7">
+            <div class="deal-title">🎉 Today's deal — 50% OFF up to ₹100</div>
+            <div class="deal-sub">Use code <strong>FOODIE50</strong> · Valid on your first 3 orders today</div>
+          </div>
+          <!-- Countdown + CTA (right) -->
+          <div class="col-md-5 text-md-end">
+            <!-- #offerCountdown filled live by app.js startOfferCountdown() -->
+            <span class="countdown-chip me-2"><i class="bi bi-hourglass-split"></i> <span id="offerCountdown">00:00:00</span></span>
+            <a href="#restaurants" class="btn btn-light fw-bold mt-2 mt-md-0">Order now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CUISINE CATEGORIES: quick-jump chips ================= -->
+    <section class="py-4 bg-white">
+      <div class="container px-3 px-lg-0">
+        <!-- Section header row: title (left) + "see all" link (right) -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="section-title h5 fw-bold mb-0">Categories</h2>
+          <a href="#restaurants" class="text-brand small fw-semibold">See all <i class="bi bi-arrow-right ms-1"></i></a>
+        </div>
+        <!-- Horizontally scrollable chip row (swipe-friendly on mobile) -->
+        <div class="category-scroll overflow-auto pb-3">
+          <div class="d-flex gap-2">
+            <!-- Each chip is a button; .active = highlighted default -->
+            <button class="category-pill active px-4 py-2">North Indian</button>
+            <button class="category-pill px-4 py-2">South Indian</button>
+            <button class="category-pill px-4 py-2">Chinese</button>
+            <button class="category-pill px-4 py-2">Pizza</button>
+            <button class="category-pill px-4 py-2">Burgers</button>
+            <button class="category-pill px-4 py-2">Biryani</button>
+            <button class="category-pill px-4 py-2">Desserts</button>
+            <button class="category-pill px-4 py-2">Beverages</button>
+            <button class="category-pill px-4 py-2">Healthy</button>
+            <button class="category-pill px-4 py-2">Fast Food</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS: 3-step explainer (reduces friction) ============ -->
+    <section class="container py-4 py-lg-5">
+      <div class="text-center mb-4 reveal">
+        <div class="eyebrow mb-2">GOOD FOOD, GOOD MOOD</div>
+        <h2 class="section-title mb-1">Order in 3 easy steps</h2>
+        <p class="section-subtitle mx-auto mb-0">From craving to doorstep — no calls, no waiting on hold.</p>
+      </div>
+      <div class="row g-4">
+        <!-- STEP 1 — browse -->
+        <div class="col-md-4 reveal">
+          <div class="step-card text-center">
+            <div class="step-num mx-auto">1</div><!-- circled number -->
+            <h3 class="h6 fw-bold">Pick your restaurant</h3>
+            <p class="small muted mb-0">Search cuisines, compare ratings and find today's best offers.</p>
+          </div>
+        </div>
+        <!-- STEP 2 — add to cart -->
+        <div class="col-md-4 reveal">
+          <div class="step-card text-center">
+            <div class="step-num mx-auto">2</div>
+            <h3 class="h6 fw-bold">Fill your cart</h3>
+            <p class="small muted mb-0">Tap Add, tweak quantities and apply the daily deal at checkout.</p>
+          </div>
+        </div>
+        <!-- STEP 3 — track -->
+        <div class="col-md-4 reveal">
+          <div class="step-card text-center">
+            <div class="step-num mx-auto">3</div>
+            <h3 class="h6 fw-bold">Track it live</h3>
+            <p class="small muted mb-0">Follow every step from kitchen to your door in real time.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ STATS BAND: animated trust counters ============ -->
+      <!-- data-count values animate 0 → target when scrolled into view (app.js) -->
+      <div class="stats-band mt-5 reveal">
+        <div class="row g-4">
+          <div class="col-6 col-md-3 stat-item">
+            <span class="stat-num" data-count="250" data-suffix="+">0</span><!-- restaurants -->
+            <span class="stat-label">Restaurants</span>
+          </div>
+          <div class="col-6 col-md-3 stat-item">
+            <span class="stat-num" data-count="18" data-suffix=" min">0</span><!-- avg delivery -->
+            <span class="stat-label">Avg. delivery</span>
+          </div>
+          <div class="col-6 col-md-3 stat-item">
+            <span class="stat-num" data-count="50" data-suffix="k+">0</span><!-- happy foodies -->
+            <span class="stat-label">Happy foodies</span>
+          </div>
+          <div class="col-6 col-md-3 stat-item">
+            <span class="stat-num" data-count="48" data-suffix="★">0</span><!-- 4.8 rating (×10) -->
+            <span class="stat-label">Avg. rating</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ TESTIMONIALS: real voices build trust ============ -->
+      <div class="row g-4 mt-2">
+        <!-- Review 1 -->
+        <div class="col-md-4 reveal">
+          <div class="quote-card">
+            <div class="stars mb-2">★★★★★</div><!-- star rating row -->
+            <p class="small mb-3">“Ordered at 1 AM and it still arrived hot. The live tracking is weirdly addictive!”</p>
+            <div class="quote-meta">
+              <div class="quote-avatar">A</div><!-- initial avatar -->
+              <div>
+                <div class="fw-bold small">Ananya R.</div><!-- reviewer name -->
+                <div class="muted" style="font-size:0.75rem">Foodie since 2024</div><!-- micro-caption -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Review 2 -->
+        <div class="col-md-4 reveal">
+          <div class="quote-card">
+            <div class="stars mb-2">★★★★★</div>
+            <p class="small mb-3">“The 50% deal is real. My office orders every Friday now — checkout takes seconds.”</p>
+            <div class="quote-meta">
+              <div class="quote-avatar">K</div>
+              <div>
+                <div class="fw-bold small">Karthik M.</div>
+                <div class="muted" style="font-size:0.75rem">42 orders placed</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Review 3 -->
+        <div class="col-md-4 reveal">
+          <div class="quote-card">
+            <div class="stars mb-2">★★★★☆</div>
+            <p class="small mb-3">“Clean UI, honest portions, and I love reordering last week's dinner in one tap.”</p>
+            <div class="quote-meta">
+              <div class="quote-avatar">S</div>
+              <div>
+                <div class="fw-bold small">Sneha P.</div>
+                <div class="muted" style="font-size:0.75rem">Repeat customer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ RESTAURANT DISCOVERY: search + filter + grid ============ -->
+      <!-- #restaurants is the hero CTA anchor target -->
+      <div id="restaurants" class="pt-5 mt-2">
+        <!-- Header row: copy (left) + demo count pill (right) -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3 mb-4">
+          <div>
+            <div class="eyebrow mb-2">YOUR NEXT GREAT MEAL</div>
+            <h2 class="section-title mb-1">Popular near you</h2>
+            <p class="muted mb-0">A few crowd-pleasers to get you started.</p>
+          </div>
+          <span class="pill">6 demo restaurants</span>
+        </div>
+
+        <!-- LIVE CONTROLS: typed text filters instantly (ui.js renderRestaurants) -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-8">
+            <div class="search-wrap d-flex align-items-center gap-2">
+              <i class="bi bi-search muted"></i>
+              <input id="restaurantSearch" class="form-control border-0 shadow-none p-2"
+                     placeholder="Search restaurants or cuisines..." aria-label="Search restaurants">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <!-- Cuisine <select> narrows cards by data-search tag -->
+            <select id="cuisineFilter" class="form-select">
+              <option value="">All cuisines</option>
+              <option>Indian</option>
+              <option>Burgers</option>
+              <option>Healthy</option>
+              <option>Pizza</option>
+              <option>Asian</option>
+              <option>Desserts</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Cards injected here by restaurantCard() in ui.js -->
+        <div id="restaurantGrid" class="row g-4"></div>
+
+        <!-- Empty state: shown only when search/filter yields 0 matches -->
+        <div id="noRestaurants" class="empty-state d-none mt-3">
+          <div class="fs-1">🔎</div>
+          <h3 class="h5 fw-bold mt-2">No matches found</h3>
+          <p class="muted mb-0">Try another restaurant name or cuisine.</p>
+        </div>
+      </div><!-- /#restaurants -->
+    </section><!-- /container: discovery section -->
+
+    <!-- ============ NEWSLETTER CTA: capture returning visitors ============ -->
+    <section class="container my-5">
+      <div class="cta-band reveal">
+        <div class="row align-items-center g-4">
+          <!-- Pitch (left) -->
+          <div class="col-lg-6">
+            <span class="eyebrow" style="color:#ffb37a">STAY IN THE LOOP</span>
+            <h2 class="h3 mt-2 mb-2">Get ₹100 off your next order</h2>
+            <p class="mb-lg-0">Weekly drops, secret menus and members-only deals — straight to your inbox.</p>
+          </div>
+          <!-- Email form (right): demo submit shows a toast via inline handler -->
+          <div class="col-lg-6">
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="you@example.com" aria-label="Email address">
+              <button class="btn btn-brand fw-bold px-4" type="button"
+                      onclick="window.showToast && window.showToast('Thanks! Your ₹100 coupon is on its way 🎉')">
+                Join free
+              </button>
+            </div>
+            <small class="d-block mt-2" style="color:rgba(255,255,255,0.55)">No spam. Unsubscribe anytime.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER: brand + legal mini-links ================= -->
+  <footer class="footer mt-5 py-4">
+    <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+      <span class="fw-bold">Foodie<span class="text-brand">Express</span></span>
+      <span class="small">Good food, delivered with a little joy.
+        <span class="muted">Demo frontend · No real payments</span>
+      </span>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS bundle: needed for offcanvas menu + payment modal -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- App entry (ES module): renderers, engagement widgets, global handlers -->
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>
+

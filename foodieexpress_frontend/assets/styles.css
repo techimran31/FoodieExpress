@@ -1676,4 +1676,275 @@ footer.footer .text-brand {
     .confirmation-panel {
         padding: 32px 20px;
     }
+
+
+/* ============================================================================
+   ENGAGEMENT & ANIMATION LAYER
+   ----------------------------------------------------------------------------
+   Added for the visual-redesign pass. Everything below is additive:
+   new components (deal banner, how-it-works, testimonials, newsletter,
+   floating badges) + motion (keyframes, reveal-on-scroll, parallax targets).
+   Every rule is annotated for readability.
+   ========================================================================== */
+
+/* ---- Keyframe library (reusable animations) ------------------------------ */
+
+/* confettiFall — used by ui.js celebrate(); pieces drop + spin off-screen */
+@keyframes confettiFall {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }    /* start at top, fully visible */
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } /* fall a full viewport, fade out */
 }
+
+/* floatGentle — idle bobbing for hero emojis/decorations (feels "alive") */
+@keyframes floatGentle {
+    0%, 100% { transform: translateY(0); }        /* rest position */
+    50%      { transform: translateY(-14px); }    /* rise 14px at midpoint */
+}
+
+/* pulseSoft — attention pulse for badges / countdown / CTA chips */
+@keyframes pulseSoft {
+    0%, 100% { transform: scale(1); }      /* normal size */
+    50%      { transform: scale(1.06); }   /* grow 6% (subtle, not garish) */
+}
+
+/* shimmerSweep — glossy light sweep across promo banners */
+@keyframes shimmerSweep {
+    0%   { transform: translateX(-120%); } /* light starts off-left */
+    100% { transform: translateX(120%); }  /* exits right */
+}
+
+/* fadeSlideUp — entrance animation for .reveal content blocks */
+@keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(28px); } /* hidden + lowered */
+    to   { opacity: 1; transform: translateY(0); }    /* final resting spot */
+}
+
+/* popIn — scale-up entrance for cards/stickers */
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.88); } /* small + transparent */
+    to   { opacity: 1; transform: scale(1); }    /* full size + opaque */
+}
+
+/* ---- Reveal-on-scroll (JS adds .revealed — see app.js observeReveal) ----- */
+.reveal {
+    opacity: 0;                                  /* invisible until revealed */
+    transform: translateY(28px);                  /* start slightly below */
+    transition: opacity 0.7s ease, transform 0.7s ease; /* smooth 700ms fade/slide */
+}
+.reveal.revealed {
+    opacity: 1;                                   /* fade in… */
+    transform: translateY(0);                     /* …and slide up into place */
+}
+
+/* ---- Deal / offer countdown banner --------------------------------------- */
+.deal-banner {
+    background: linear-gradient(120deg, #2d3436 0%, #4a3a8f 55%, #ff6b00 130%); /* rich dark→violet→orange */
+    border-radius: var(--fx-radius-lg);           /* rounded 24px corners */
+    color: #ffffff;                               /* white text on dark */
+    padding: 28px 32px;                           /* roomy inner spacing */
+    position: relative;                           /* anchor for shine layer */
+    overflow: hidden;                             /* clip the shimmer */
+    box-shadow: var(--fx-shadow-md);              /* lifted card feel */
+}
+.deal-banner::after {                             /* glossy sweep every 4s */
+    content: "";                                  /* pseudo-element needs content */
+    position: absolute; top: 0; left: 0;          /* cover whole banner… */
+    width: 60%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.14), transparent); /* soft light band */
+    animation: shimmerSweep 4s ease-in-out infinite; /* loop left→right */
+    pointer-events: none;                         /* never block button clicks */
+}                                                 /* ← close .deal-banner::after */
+
+/* ---- Offer ribbon (restaurant card corner tag) --------------------------- */
+.offer-ribbon {
+    position: absolute;                /* pin relative to .food-card */
+    top: 14px; left: 14px;             /* top-left corner of the image */
+    background: var(--fx-bg-gradient);  /* brand orange gradient */
+    color: #ffffff;                    /* white text */
+    font-size: 0.75rem; font-weight: 800; /* small + punchy */
+    padding: 5px 12px;                 /* pill-ish padding */
+    border-radius: var(--fx-radius-pill);
+    box-shadow: var(--fx-shadow-sm);    /* slight lift off the photo */
+    z-index: 2;                        /* above image, below sticky nav */
+    letter-spacing: 0.3px;
+}
+
+/* ---- Wishlist heart button (top-right of card) --------------------------- */
+.wishlist-btn {
+    position: absolute; top: 12px; right: 12px; /* pin to card corner */
+    width: 38px; height: 38px;                  /* comfortable tap target */
+    border: none; border-radius: 50%;           /* circular ghost button */
+    background: rgba(255, 255, 255, 0.92);      /* frosted white disc */
+    color: var(--fx-text-muted);                /* grey heart outline */
+    font-size: 1.05rem;                         /* icon sizing */
+    display: flex; align-items: center; justify-content:center;
+    box-shadow: var(--fx-shadow-sm);            /* subtle depth */
+    z-index: 2;                                 /* above card image */
+    transition: var(--fx-transition);           /* smooth hover/like */
+    cursor: pointer;
+}
+.wishlist-btn:hover {                           /* hover feedback */
+    transform: scale(1.12);                     /* grow 12% */
+    color: var(--fx-danger);                    /* pre-tint red */
+}
+.wishlist-btn.saved {                           /* liked state */
+    background: var(--fx-danger);               /* red disc */
+    color: #ffffff;                             /* white glyph */
+    animation: popIn 0.3s ease;                 /* quick pop on like */
+}
+
+/* ---- Card hover lift (works with existing .food-card) -------------------- */
+.food-card { transition: var(--fx-transition); } /* unify transitions */
+.food-card:hover {                               /* on hover… */
+    transform: translateY(-6px);                 /* lift 6px */
+    box-shadow: var(--fx-shadow-lg);             /* bigger shadow */
+    border-color: rgba(255, 107, 0, 0.35);       /* orange-tinted edge */
+}
+
+/* ---- Stats counters band ------------------------------------------------- */
+.stats-band {
+    background: var(--fx-bg-gradient);           /* full brand gradient */
+    border-radius: var(--fx-radius-lg);          /* rounded container */
+    color: #ffffff;                              /* white text */
+    padding: 36px 24px;
+    box-shadow: var(--fx-shadow-md);
+}
+.stat-item { text-align: center; }               /* number + label centered */
+.stat-item .stat-num {                           /* animated number */
+    font-size: 2.25rem; font-weight: 900;        /* big + heavy */
+    font-variant-numeric: tabular-nums;          /* stable digit width */
+    display: block;                              /* own line */
+}
+.stat-item .stat-label {                         /* caption under number */
+    font-size: 0.85rem; color: rgba(255, 255, 255, 0.85);
+    text-transform: uppercase; letter-spacing: 1.2px;
+}
+
+/* ---- How-it-works steps -------------------------------------------------- */
+.step-card {                                     /* one numbered step */
+    background: var(--fx-bg-card); border: 1px solid var(--fx-border);
+    border-radius: var(--fx-radius-md); padding: 26px 22px; height: 100%;
+    transition: var(--fx-transition);
+}
+.step-card:hover { transform: translateY(-5px); box-shadow: var(--fx-shadow-md); }
+.step-num {                                      /* big circled number */
+    width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255,107,0,0.14), rgba(255,140,66,0.24));
+    color: var(--fx-primary); font-weight: 900; font-size: 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px;
+}
+
+.deal-banner .deal-title {                        /* headline e.g. "50% OFF today" */
+    font-size: 1.5rem; font-weight: 900;          /* big + heavy */
+    letter-spacing: -0.4px;                       /* tighter tracking */
+    margin-bottom: 4px;                           /* breathing room below */
+}
+.deal-banner .deal-sub {                          /* supporting line */
+    color: rgba(255, 255, 255, 0.78);             /* soft white */
+    font-size: 0.95rem; margin-bottom: 14px;      /* spacing before chips */
+}
+.countdown-chip {                                  /* "07:42:15" pill */
+    display: inline-flex; align-items: center;     /* inline pill layout */
+    gap: 6px; padding: 8px 16px;                  /* comfortable tap size */
+    background: rgba(255, 255, 255, 0.14);         /* translucent chip */
+    border: 1px solid rgba(255, 255, 255, 0.25);   /* hairline outline */
+    border-radius: var(--fx-radius-pill);          /* fully rounded */
+    font-weight: 800; font-variant-numeric: tabular-nums; /* monospaced digits — no jitter */
+    font-size: 1.05rem; letter-spacing: 1px;       /* airy digits */
+    animation: pulseSoft 2s ease-in-out infinite;  /* gentle heartbeat = urgency */
+}
+
+/* ---- Testimonials -------------------------------------------------------- */
+.quote-card {                                   /* customer quote tile */
+    background: var(--fx-bg-card); border: 1px solid var(--fx-border);
+    border-radius: var(--fx-radius-md); padding: 26px; height: 100%;
+    position: relative; box-shadow: var(--fx-shadow-sm);
+    transition: var(--fx-transition);
+}
+.quote-card:hover { box-shadow: var(--fx-shadow-md); } /* lift on hover */
+.quote-card::before {                           /* giant decorative quote mark */
+    content: "\201C";                            /* typographic open-quote glyph */
+    position: absolute; top: 4px; right: 16px;   /* top-right watermark spot */
+    font-size: 4rem; line-height: 1;             /* oversized, single line */
+    color: rgba(255, 107, 0, 0.15);              /* faint brand tint */
+    font-family: Georgia, serif;                 /* serif = editorial feel */
+}
+.quote-card .stars { color: #f5a623; letter-spacing: 2px; } /* ★★★★★ row */
+.quote-avatar {                                 /* reviewer initial circle */
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--fx-bg-gradient); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+}
+.quote-meta { display: flex; align-items: center; gap: 10px; } /* avatar+name row */
+
+/* ---- Newsletter / app CTA band ------------------------------------------- */
+.cta-band {
+    background: linear-gradient(135deg, #2d3436 0%, #3d2f66 60%, #6a3d9a 120%);
+    border-radius: var(--fx-radius-lg); color: #ffffff;
+    padding: 44px 36px; position: relative; overflow: hidden;
+}
+.cta-band h2 { font-weight: 900; letter-spacing: -0.5px; } /* punchy headline */
+.cta-band p { color: rgba(255, 255, 255, 0.75); }          /* muted support copy */
+.cta-band .input-group .form-control {                     /* email field */
+    border-radius: var(--fx-radius-pill) 0 0 var(--fx-radius-pill); /* round left */
+    border: none; padding: 12px 20px;                      /* comfy input */
+}
+.cta-band .input-group .btn {                              /* join button */
+    border-radius: 0 var(--fx-radius-pill) var(--fx-radius-pill) 0; /* round right */
+    white-space: nowrap;                                   /* never wrap label */
+}
+
+
+/* ---- Floating hero decoration (parallax target from app.js) ------------- */
+.float-soft {
+    position: absolute;                          /* free placement inside hero */
+    transition: transform 0.35s ease-out;        /* smooth parallax follow */
+    pointer-events: none;                        /* never blocks clicks */
+    animation: floatGentle 5s ease-in-out infinite; /* idle bobbing loop */
+    filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.25)); /* depth */
+    z-index: 2;                                  /* above photo, under copy */
+    will-change: transform;                      /* GPU hint for smooth motion */
+}
+
+/* ---- Gradient text helper (headline accent) ------------------------------ */
+.text-gradient {
+    background: var(--fx-bg-gradient);           /* brand gradient paint… */
+    -webkit-background-clip: text;               /* …clip it to the glyphs */
+    -webkit-text-fill-color: transparent;        /* …hide the solid fill */
+}
+
+/* ---- Staggered entrance for generated rows (menu items etc.) ------------ */
+@keyframes itemIn {
+    from { opacity: 0; transform: translateY(16px); } /* hidden + lowered */
+    to   { opacity: 1; transform: translateY(0); }    /* arrive in place */
+}
+.animate-in { animation: itemIn 0.5s ease forwards; } /* forwards = hold end state */
+
+/* ---- Glow ring on primary CTAs (draws the eye) -------------------------- */
+.btn-brand { position: relative; overflow: hidden; } /* clip the shine sweep */
+.btn-brand::after {                                   /* gloss flash on hover */
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.35), transparent 70%);
+    transform: translateX(-100%);                     /* start off-left */
+    transition: transform 0.55s ease;                  /* animated sweep */
+}
+.btn-brand:hover::after { transform: translateX(100%); } /* sweep across on hover */
+
+/* ---- Badge ping (active order status) ------------------------------------ */
+.status-badge { transition: var(--fx-transition); }
+.status-badge.status-delivered { animation: popIn 0.4s ease; } /* pop when delivered */
+
+/* ---- Responsive: polish new components on small screens ----------------- */
+@media (max-width: 576px) {
+    .deal-banner { padding: 22px 20px; }      /* tighter banner padding */
+    .deal-banner .deal-title { font-size: 1.2rem; } /* smaller headline */
+    .stats-band { padding: 26px 14px; }       /* compact stats band */
+    .stat-item .stat-num { font-size: 1.7rem; } /* shrink big numbers */
+    .cta-band { padding: 30px 20px; }         /* compact CTA band */
+    .offer-ribbon { top: 10px; left: 10px; font-size: 0.7rem; } /* smaller ribbon */
+    .quote-card::before { font-size: 3rem; }  /* tone down watermark on mobile */
+    .float-soft { display: none; }            /* skip parallax clutter on phones */
+}
+

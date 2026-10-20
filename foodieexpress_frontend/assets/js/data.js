@@ -1,4 +1,23 @@
-// FoodieExpress — Demo Data (Restaurants & Menus)
+// ============================================================================
+// FoodieExpress — data.js (Demo Data: Restaurants & Menus)
+// ----------------------------------------------------------------------------
+// Static seed data used in demo mode (no backend).
+// Swap these arrays for API responses when a backend exists.
+// ============================================================================
+
+// ---------------------------------------------------------------------------
+// RESTAURANTS — each object powers one card on index.html
+//   id        → URL slug used in menu.html?restaurant=<id>
+//   name      → display name
+//   cuisine   → subtitle shown under the name
+//   rating    → star rating (shown in .rating badge)
+//   time      → delivery estimate string
+//   fee       → delivery fee in ₹ (used by card pill)
+//   offer     → promo line (e.g. "20% off")
+//   emoji     → big card image substitute (food emoji)
+//   color     → pastel background behind the emoji
+//   tags      → cuisine keywords for search/filter matching
+// ---------------------------------------------------------------------------
 export const restaurants = [
   { id: 'spice-route', name: 'Spice Route Kitchen', cuisine: 'Indian · Biryani', rating: 4.7, time: '25–35 min', fee: 25, offer: '20% off', emoji: '🍛', color: '#ffe2c7', tags: ['Indian', 'Biryani'] },
   { id: 'burger-barn', name: 'Burger Barn', cuisine: 'Burgers · Fast Food', rating: 4.5, time: '20–30 min', fee: 20, offer: 'Free fries', emoji: '🍔', color: '#ffe8a8', tags: ['Burgers', 'Fast Food'] },
@@ -8,6 +27,12 @@ export const restaurants = [
   { id: 'sweet-cloud', name: 'Sweet Cloud', cuisine: 'Desserts · Bakery', rating: 4.8, time: '15–25 min', fee: 10, offer: 'Sweet treats', emoji: '🧁', color: '#f7dff0', tags: ['Desserts', 'Bakery'] },
 ];
 
+// ---------------------------------------------------------------------------
+// MENUS — keyed by restaurant id.
+// Each item is a tuple: [name, description, price, emoji, badge]
+//   price → number in ₹ (no symbol — money() adds it)
+//   badge → short tag like "Bestseller" / "Veg" (shown as a pill)
+// ---------------------------------------------------------------------------
 export const menus = {
   'spice-route': [
     ['Chicken Dum Biryani', 'Fragrant basmati rice, tender chicken and house spices.', 249, '🍗', 'Bestseller'],
@@ -43,5 +68,10 @@ export const menus = {
   ],
 };
 
+// ---------------------------------------------------------------------------
+// Helper lookups (fail-safe with fallbacks so pages never crash)
+// findRestaurant(id) → restaurant object, or first restaurant if id unknown
+// getMenu(id)        → menu array, or Spice Route's menu if id unknown
+// ---------------------------------------------------------------------------
 export const findRestaurant = (id) => restaurants.find((r) => r.id === id) || restaurants[0];
 export const getMenu = (restaurantId) => menus[restaurantId] || menus['spice-route'];
